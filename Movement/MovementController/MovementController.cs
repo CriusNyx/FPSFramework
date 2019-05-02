@@ -379,6 +379,12 @@ namespace GameEngine.Movement
                 SwitchToGround();
             }
 
+            var collider = groundCollision.collider;
+            if(collider.attachedRigidbody != null)
+            {
+                collider.attachedRigidbody.AddForceAtPosition(-localUp, groundCollision.contactPoint, ForceMode.Force);
+            }
+
             //Apply acceleration, and get the vlocity
             (Vector3 localVelocity, float yVelocity) = ApplyAcceleration(true);
 
