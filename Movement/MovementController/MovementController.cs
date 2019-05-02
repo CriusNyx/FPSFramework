@@ -315,6 +315,10 @@ namespace GameEngine.Movement
         private void Awake()
         {
             InitRigidbody();
+            if (!Physics.autoSyncTransforms)
+            {
+                Debug.LogError("For this to function as expected, ProjectSettings/Physics/AutoSyncTransforms must be enabled.");
+            }
         }
 
         /// <summary>
