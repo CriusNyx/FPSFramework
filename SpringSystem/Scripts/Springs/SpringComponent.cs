@@ -136,15 +136,6 @@ public abstract class SpringComponent : MonoBehaviour
 
     protected abstract (Vector3 position, Quaternion rotation) PropegateReset(Vector3 position, Quaternion rotation);
 
-    //public IReadOnlyWrapper<Vector3> GetPositionRef()
-    //{
-    //    return position;
-    //}
-    //public IReadOnlyWrapper<Quaternion> GetRotationRef()
-    //{
-    //    return rotation;
-    //}
-
     public static SpringComponent AutoLink(GameObject gameObject)
     {
         SpringComponent root = gameObject.GetComponent<SpringComponent>();

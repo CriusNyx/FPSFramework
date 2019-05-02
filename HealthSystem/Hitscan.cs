@@ -8,21 +8,34 @@ public static class Hitscan
     /// <summary>
     /// Cast a hitscan over the scene
     /// </summary>
+    /// <param name="ray">The ray to cast</param>
+    /// <param name="dHealth">The Delta Health object to use for damage/healing</param>
+    /// <param name="distance">The distance to apply the hitscan over. Default, infinity</param>
+    /// <param name="layerMask">The layers to cast the hitscan over. Default all</param>
+    /// <param name="penetrate">This hitscan penetrates walls. Default false</param>
+    /// <param name="targets">The targets to cast the hitscan over. Default, whole scene</param>
+    /// <param name="OnHit">The function to call on a hit. Default None</param>
+    public static void Cast(Ray ray, DeltaHealth dHealth, float distance = Mathf.Infinity, int layerMask = -1, bool penetrate = false, Collider[] targets = null, Action<Hurtbox, RaycastHit> OnHit = null)
+        => Cast(ray.origin, ray.direction, dHealth, distance, layerMask, penetrate, targets, OnHit);
+
+    /// <summary>
+    /// Cast a hitscan over the scene
+    /// </summary>
     /// <param name="origin">The point to cast the hitscan from</param>
     /// <param name="direction">The direction to cast the hitscan</param>
     /// <param name="dHealth">The Delta Health object to use for damage/healing</param>
     /// <param name="distance">The distance to apply the hitscan over. Default, infinity</param>
-    /// <param name="layer">The layers to cast the hitscan over. Default all</param>
+    /// <param name="layerMask">The layers to cast the hitscan over. Default all</param>
     /// <param name="penetrate">This hitscan penetrates walls. Default false</param>
     /// <param name="targets">The targets to cast the hitscan over. Default, whole scene</param>
     /// <param name="OnHit">The function to call on a hit. Default None</param>
-    public static void Cast(Vector3 origin, Vector3 direction, DeltaHealth dHealth, float distance = Mathf.Infinity, int layer = -1, bool penetrate = false, Collider[] targets = null, Action<Hurtbox, RaycastHit> OnHit = null)
+    public static void Cast(Vector3 origin, Vector3 direction, DeltaHealth dHealth, float distance = Mathf.Infinity, int layerMask = -1, bool penetrate = false, Collider[] targets = null, Action<Hurtbox, RaycastHit> OnHit = null)
     {
         if (penetrate)
         {
             if(targets == null)
             {
-                foreach (var hit in Physics.RaycastAll(origin, direction, distance, layer))
+                foreach (var hit in Physics.RaycastAll(origin, direction, distance, layerMask))
                 {
                     ApplyCastHit(dHealth, hit, OnHit);
                 }
@@ -44,7 +57,7 @@ public static class Hitscan
             if(targets == null)
             {
                 RaycastHit hit;
-                if(Physics.Raycast(origin, direction, out hit, distance, layer))
+                if(Physics.Raycast(origin, direction, out hit, distance, layerMask))
                 {
                     ApplyCastHit(dHealth, hit, OnHit);
                 }
