@@ -386,7 +386,7 @@ namespace GameEngine.Movement
             var collider = groundCollision.collider;
             if(collider.attachedRigidbody != null)
             {
-                collider.attachedRigidbody.AddForceAtPosition(-localUp, groundCollision.contactPoint, ForceMode.Force);
+                collider.attachedRigidbody.AddForceAtPosition(localUp * rigidbody.mass * stats.gravity, groundCollision.contactPoint, ForceMode.Force);
             }
 
             //Apply acceleration, and get the vlocity
