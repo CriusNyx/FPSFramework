@@ -1,13 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class InputGUI : MonoBehaviour
+namespace FPSFramework.Demo
 {
-    private void OnGUI()
+    public class InputGUI : MonoBehaviour
     {
-        GUILayout.Label(
-            @"
+        private void OnGUI()
+        {
+            GUILayout.Label(
+                @"
 
 
     W, A, S, D: Move Around
@@ -17,6 +18,7 @@ public class InputGUI : MonoBehaviour
     Esc: Reset Scene
     Alt+F4: Exit
     Up Arrow, Down Arror: Increase/Decrease platform speed"
-            );
+                );
+        }
     }
 }

@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityUtilities.ExecutionOrder.ExecutionOrderControl;
 
-namespace GameEngine.Movement
+namespace FPSFramework.Movement.CoordinateSpaces
 {
     [ExecutionOrder(ExecutionOrderValue.PostLogic)]
     public class PlatformCollider : MonoBehaviour

@@ -1,7 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
+using FPSFramework.Movement.CoordinateSpaces;
+using UnityUtilities.ExecutionOrder.ExecutionOrderControl;
 
-namespace GameEngine.Movement
+namespace FPSFramework.Movement
 {
     [ExecutionOrder(ExecutionOrderValue.PrePhysics)]
     [RequireComponent(typeof(MovementController))]

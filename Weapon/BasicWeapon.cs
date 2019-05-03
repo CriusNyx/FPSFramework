@@ -1,28 +1,33 @@
-﻿using System;
+﻿using FPSFramework.HealthSystem;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityUtilities;
 
-public abstract class BasicWeapon : IWeapon
+namespace FPSFramework.Weapons
 {
-    public void AcceptEvent(CEvent e)
+    public abstract class BasicWeapon : IWeapon
     {
-        if(e is WeaponFireEvent we)
+        public void AcceptEvent(CEvent e)
         {
-            Fire(we);
+            if (e is WeaponFireEvent we)
+            {
+                Fire(we);
+            }
         }
-    }
 
-    protected DeltaHealth dHealth;
-    protected int layerMask;
-    protected float distance;
-    protected bool penetrate;
-    protected Action<Hurtbox, RaycastHit> OnHit;
+        protected DeltaHealth dHealth;
+        protected int layerMask;
+        protected float distance;
+        protected bool penetrate;
+        protected Action<Hurtbox, RaycastHit> OnHit;
 
-    public void Fire(WeaponFireEvent fireEvent)
-    {
-        Hitscan.Cast(fireEvent.ray, dHealth, distance, layerMask, penetrate, OnHit: OnHit);
+        public void Fire(WeaponFireEvent fireEvent)
+        {
+            Hitscan.Cast(fireEvent.ray, dHealth, distance, layerMask, penetrate, OnHit: OnHit);
+        }
     }
 }

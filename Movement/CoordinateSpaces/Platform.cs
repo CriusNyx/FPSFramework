@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
-using GameEngine.Movement;
+using UnityUtilities.ExecutionOrder.ExecutionOrderControl;
 
-namespace GameEngine.Movement
+namespace FPSFramework.Movement.CoordinateSpaces
 {
     [ExecutionOrder(ExecutionOrderValue.PostLogic)]
     public class Platform : MonoBehaviour

@@ -1,11 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
-using GameEngine.Movement;
 using UnityEngine.SceneManagement;
-using static GameEngine.Movement.MovementController;
-using static GameEngine.Movement.ViewController;
+using static FPSFramework.Movement.MovementController;
+using static FPSFramework.Movement.ViewController;
+using UnityUtilities;
 
-namespace GameEngine.Movement
+namespace FPSFramework.Movement
 {
     public class InputController : MonoBehaviour
     {

@@ -1,17 +1,20 @@
 ﻿using UnityEngine;
 
-public class SpringOffset : SpringComponent
+namespace FPSFramework.Springs
 {
-    public Vector3 offset;
-    public Quaternion rotationOffset = Quaternion.identity;
-
-    protected override (Vector3, Quaternion) GetPositionRotation(Vector3 position, Quaternion rotation, float deltaTime)
+    public class SpringOffset : SpringComponent
     {
-        return (position + rotation * offset, rotation * rotationOffset);
-    }
+        public Vector3 offset;
+        public Quaternion rotationOffset = Quaternion.identity;
 
-    protected override (Vector3 position, Quaternion rotation) PropegateReset(Vector3 position, Quaternion rotation)
-    {
-        return (offset + rotation * offset, rotationOffset * rotation);
+        protected override (Vector3, Quaternion) GetPositionRotation(Vector3 position, Quaternion rotation, float deltaTime)
+        {
+            return (position + rotation * offset, rotation * rotationOffset);
+        }
+
+        protected override (Vector3 position, Quaternion rotation) PropegateReset(Vector3 position, Quaternion rotation)
+        {
+            return (offset + rotation * offset, rotationOffset * rotation);
+        }
     }
 }

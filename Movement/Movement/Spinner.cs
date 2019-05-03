@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-namespace GameEngine.Movement
+namespace FPSFramework.Movement
 {
     public class Spinner : MonoBehaviour
     {

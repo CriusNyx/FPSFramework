@@ -4,8 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityUtilities;
 
-namespace GameEngine.Movement
+namespace FPSFramework.Movement
 {
     [RequireComponent(typeof(MovementController))]
     public class PlayerCharacter : MonoBehaviour

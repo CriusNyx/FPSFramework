@@ -5,18 +5,21 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-public class SpringSimulator : MonoBehaviour
+namespace FPSFramework.Springs
 {
-    SpringComponent root;
-
-    private void Start()
+    public class SpringSimulator : MonoBehaviour
     {
-        root = SpringComponent.AutoLink(gameObject);
-        root.Reset(transform.position, transform.rotation);
-    }
+        SpringComponent root;
 
-    private void Update()
-    {
-        root.Propegate(transform.position, transform.rotation, Time.deltaTime);
+        private void Start()
+        {
+            root = SpringComponent.AutoLink(gameObject);
+            root.Reset(transform.position, transform.rotation);
+        }
+
+        private void Update()
+        {
+            root.Propegate(transform.position, transform.rotation, Time.deltaTime);
+        }
     }
 }

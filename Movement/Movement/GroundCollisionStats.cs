@@ -1,4 +1,4 @@
-﻿namespace GameEngine.Movement
+﻿namespace FPSFramework.Movement
 {
     /// <summary>
     /// Container to hold ground collision stats.

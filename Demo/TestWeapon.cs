@@ -1,24 +1,29 @@
-﻿using System.Collections;
+﻿using FPSFramework.HealthSystem;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityUtilities.DataStructures;
 
-public class TestWeapon : MonoBehaviour
+namespace FPSFramework.Demo
 {
-    new Camera camera;
-
-    static DeltaHealth dHealth = new DeltaHealth(-1);
-    static Thunk<int> hitscanMask = new Thunk<int>(() => ~LayerMask.GetMask("Player"));
-
-    private void Start()
+    public class TestWeapon : MonoBehaviour
     {
-        camera = GetComponentInChildren<Camera>();
-    }
+        new Camera camera;
 
-    private void Update()
-    {
-        if (Input.GetMouseButtonDown(0))
+        static DeltaHealth dHealth = new DeltaHealth(-1);
+        static Thunk<int> hitscanMask = new Thunk<int>(() => ~LayerMask.GetMask("Player"));
+
+        private void Start()
         {
-            Hitscan.Cast(transform.position, camera.transform.forward, dHealth, layerMask: hitscanMask);
+            camera = GetComponentInChildren<Camera>();
+        }
+
+        private void Update()
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                Hitscan.Cast(transform.position, camera.transform.forward, dHealth, layerMask: hitscanMask);
+            }
         }
     }
 }

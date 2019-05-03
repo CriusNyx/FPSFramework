@@ -1,23 +1,27 @@
-﻿using System.Collections;
+﻿using FPSFramework.HealthSystem;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Health))]
-public class TestDestroyable : MonoBehaviour
+namespace FPSFramework.Demo
 {
-    Health health;
-
-    private void Start()
+    [RequireComponent(typeof(Health))]
+    public class TestDestroyable : MonoBehaviour
     {
-        health = GetComponent<Health>();
-        health.SetHealth(1);
-        health.OnDeath += (x, y) => Kill();
+        Health health;
 
-        Hurtbox.Create(gameObject, health);
-    }
+        private void Start()
+        {
+            health = GetComponent<Health>();
+            health.SetHealth(1);
+            health.OnDeath += (x, y) => Kill();
 
-    void Kill()
-    {
-        Destroy(gameObject);
+            Hurtbox.Create(gameObject, health);
+        }
+
+        void Kill()
+        {
+            Destroy(gameObject);
+        }
     }
 }

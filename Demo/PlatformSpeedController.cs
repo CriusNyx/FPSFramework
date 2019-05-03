@@ -1,34 +1,37 @@
-﻿using GameEngine.Movement;
+﻿using FPSFramework.Movement;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlatformSpeedController : MonoBehaviour
+namespace FPSFramework.Demo
 {
-    int currentIndex;
-    float sign;
-    float[] arr = new float[] { 5, 180, 360, 700, 1000, 2000, 5000 };
-    Spinner spinner;
-
-    private void Start()
+    public class PlatformSpeedController : MonoBehaviour
     {
-        spinner = GetComponent<Spinner>();
-        sign = Mathf.Sign(spinner.theta.z);
-    }
+        int currentIndex;
+        float sign;
+        float[] arr = new float[] { 5, 180, 360, 700, 1000, 2000, 5000 };
+        Spinner spinner;
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.UpArrow))
+        private void Start()
         {
-            currentIndex = Mathf.Clamp(currentIndex + 1, 0, arr.Length - 1);
-            spinner.theta = Vector3.forward * sign * arr[currentIndex];
+            spinner = GetComponent<Spinner>();
+            sign = Mathf.Sign(spinner.theta.z);
         }
-        if (Input.GetKeyDown(KeyCode.DownArrow))
+
+        // Update is called once per frame
+        void Update()
         {
-            currentIndex = Mathf.Clamp(currentIndex - 1, 0, arr.Length - 1);
-            spinner.theta = Vector3.forward * sign * arr[currentIndex];
+            if (Input.GetKeyDown(KeyCode.UpArrow))
+            {
+                currentIndex = Mathf.Clamp(currentIndex + 1, 0, arr.Length - 1);
+                spinner.theta = Vector3.forward * sign * arr[currentIndex];
+            }
+            if (Input.GetKeyDown(KeyCode.DownArrow))
+            {
+                currentIndex = Mathf.Clamp(currentIndex - 1, 0, arr.Length - 1);
+                spinner.theta = Vector3.forward * sign * arr[currentIndex];
+            }
         }
     }
 }

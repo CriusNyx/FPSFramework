@@ -2,54 +2,57 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-/// <summary>
-/// Allows a gameObject to collide with hurtboxes
-/// </summary>
-[RequireComponent(typeof(Collider))]
-[RequireComponent(typeof(Rigidbody))]
-public class Hitbox : MonoBehaviour
+namespace FPSFramework.HealthSystem
 {
-    const string HITBOX_LAYER = "Hitbox";
-
-    new Collider collider;
-    new Rigidbody rigidbody;
-
-    DeltaHealth dHealth;
-
     /// <summary>
-    /// Create a new hitbox on the gameObject with the DeltaHealth object
+    /// Allows a gameObject to collide with hurtboxes
     /// </summary>
-    /// <param name="gameObject"></param>
-    /// <param name="dHealth"></param>
-    /// <returns></returns>
-    public static Hitbox Create(GameObject gameObject, DeltaHealth dHealth)
+    [RequireComponent(typeof(Collider))]
+    [RequireComponent(typeof(Rigidbody))]
+    public class Hitbox : MonoBehaviour
     {
-        var hitbox = gameObject.AddComponent<Hitbox>();
-        hitbox.dHealth = dHealth;
-        return hitbox;
-    }
+        const string HITBOX_LAYER = "Hitbox";
 
-    //private Hitbox Init(DeltaHealth dHealth)
-    //{
-    //    this.dHealth = dHealth;
+        new Collider collider;
+        new Rigidbody rigidbody;
 
-    //    return this;
-    //}
+        DeltaHealth dHealth;
 
-    void Start()
-    {
-        gameObject.layer = LayerMask.NameToLayer(HITBOX_LAYER);
+        /// <summary>
+        /// Create a new hitbox on the gameObject with the DeltaHealth object
+        /// </summary>
+        /// <param name="gameObject"></param>
+        /// <param name="dHealth"></param>
+        /// <returns></returns>
+        public static Hitbox Create(GameObject gameObject, DeltaHealth dHealth)
+        {
+            var hitbox = gameObject.AddComponent<Hitbox>();
+            hitbox.dHealth = dHealth;
+            return hitbox;
+        }
 
-        collider = GetComponent<Collider>();
-        collider.isTrigger = true;
+        //private Hitbox Init(DeltaHealth dHealth)
+        //{
+        //    this.dHealth = dHealth;
 
-        rigidbody = GetComponent<Rigidbody>();
-        rigidbody.isKinematic = true;
-    }
+        //    return this;
+        //}
 
-    private void OnTriggerEnter(Collider other)
-    {
-        Hurtbox hurtbox = other.GetComponent<Hurtbox>();
-        hurtbox?.ApplyDeltaHealth(dHealth);
+        void Start()
+        {
+            gameObject.layer = LayerMask.NameToLayer(HITBOX_LAYER);
+
+            collider = GetComponent<Collider>();
+            collider.isTrigger = true;
+
+            rigidbody = GetComponent<Rigidbody>();
+            rigidbody.isKinematic = true;
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            Hurtbox hurtbox = other.GetComponent<Hurtbox>();
+            hurtbox?.ApplyDeltaHealth(dHealth);
+        }
     }
 }

@@ -1,28 +1,34 @@
-﻿using System;
+﻿using FPSFramework.Weapons;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityUtilities;
+using UnityUtilities.DataStructures;
 
-public class ShipGuideWeapon : IWeapon
+namespace FPSFramework.Demo.Ship
 {
-    public void AcceptEvent(CEvent e)
+    public class ShipGuideWeapon : IWeapon
     {
-        if (e is WeaponFireEvent fe)
+        public void AcceptEvent(CEvent e)
         {
-            Fire(fe);
+            if (e is WeaponFireEvent fe)
+            {
+                Fire(fe);
+            }
         }
-    }
 
-    Thunk<int> layerMask = new Thunk<int>(() => LayerMask.GetMask("Default"));
+        Thunk<int> layerMask = new Thunk<int>(() => LayerMask.GetMask("Default"));
 
-    public void Fire(WeaponFireEvent fireEvent)
-    {
-        RaycastHit hit;
-        if (Physics.Raycast(fireEvent.ray, out hit, Mathf.Infinity, layerMask))
+        public void Fire(WeaponFireEvent fireEvent)
         {
-            CEventSystem.Broadcast(Ship.ShipChannel.channel, Ship.ShipChannel.subchannel, new Ship.TargetEvent(hit.point));
+            RaycastHit hit;
+            if (Physics.Raycast(fireEvent.ray, out hit, Mathf.Infinity, layerMask))
+            {
+                CEventSystem.Broadcast(Ship.ShipChannel.channel, Ship.ShipChannel.subchannel, new Ship.TargetEvent(hit.point));
+            }
         }
     }
 }

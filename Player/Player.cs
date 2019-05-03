@@ -1,36 +1,43 @@
-﻿using GameEngine.Movement;
+﻿using FPSFramework.Actors;
+using FPSFramework.Demo.Ship;
+using FPSFramework.Movement;
+using FPSFramework.Weapons;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityUtilities;
 
-class Player : Actor
+namespace FPSFramework.Player
 {
-    public EventPlayerNumberChannel playerNumber = EventPlayerNumberChannel.player1;
-
-    ShipGuideWeapon shipGuide;
-    new Camera camera;
-
-    private void Start()
+    class Player : Actor
     {
-        InitializeActor();
-        var playerCharacter = gameObject.AddComponent<PlayerCharacter>();
-        playerCharacter.playerNumber = playerNumber;
-        //var weapon = gameObject.AddComponent<TestWeapon>();
-        shipGuide = new ShipGuideWeapon();
-        camera = transform.GetComponentInChildren<Camera>();
+        public EventPlayerNumberChannel playerNumber = EventPlayerNumberChannel.player1;
 
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-    }
+        ShipGuideWeapon shipGuide;
+        new Camera camera;
 
-    private void Update()
-    {
-        if (Input.GetKey(KeyCode.F))
+        private void Start()
         {
-            shipGuide.Fire(new WeaponFireEvent(new Ray(camera.transform.position, camera.transform.forward)));
+            InitializeActor();
+            var playerCharacter = gameObject.AddComponent<PlayerCharacter>();
+            playerCharacter.playerNumber = playerNumber;
+            //var weapon = gameObject.AddComponent<TestWeapon>();
+            shipGuide = new ShipGuideWeapon();
+            camera = transform.GetComponentInChildren<Camera>();
+
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
+
+        private void Update()
+        {
+            if (Input.GetKey(KeyCode.F))
+            {
+                shipGuide.Fire(new WeaponFireEvent(new Ray(camera.transform.position, camera.transform.forward)));
+            }
         }
     }
 }

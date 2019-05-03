@@ -2,25 +2,29 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+using FPSFramework.Springs;
 
-[CustomEditor(typeof(EditorSpringSimulator))]
-public class EditorSpringSimulatorEditor : Editor
+namespace FPSFramework.Springs
 {
-    int count;
-
-    public override void OnInspectorGUI()
+    [CustomEditor(typeof(EditorSpringSimulator))]
+    public class EditorSpringSimulatorEditor : Editor
     {
-        DrawDefaultInspector();
+        int count;
 
-        //((EditorSpringSimulator)target).Run();
+        public override void OnInspectorGUI()
+        {
+            DrawDefaultInspector();
 
-        GUILayout.Label(count++.ToString());
+            //((EditorSpringSimulator)target).Run();
 
-        EditorSpringSimulator sim = (EditorSpringSimulator)target;
-        sim.transform.position = sim.transform.position;
+            GUILayout.Label(count++.ToString());
 
-        EditorUtility.SetDirty(sim);
+            EditorSpringSimulator sim = (EditorSpringSimulator)target;
+            sim.transform.position = sim.transform.position;
 
-        Repaint();
+            EditorUtility.SetDirty(sim);
+
+            Repaint();
+        }
     }
 }

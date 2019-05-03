@@ -9,55 +9,57 @@ using System.Threading;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
-
-public class EditorSpringSimulator : MonoBehaviour
+namespace FPSFramework.Springs
 {
-#if UNITY_EDITOR
-    float time = -1f;
-
-    public void OnDrawGizmos()
+    public class EditorSpringSimulator : MonoBehaviour
     {
-        //compute delta time
-        float deltaTime = 0f;
-        if(time == -1f)
-        {
-            time = (float)EditorApplication.timeSinceStartup;
-        }
-        deltaTime = (float)EditorApplication.timeSinceStartup - time;
-        time = (float)EditorApplication.timeSinceStartup;
+#if UNITY_EDITOR
+        float time = -1f;
 
-        if(Application.isPlaying)
+        public void OnDrawGizmos()
         {
-            deltaTime = Time.deltaTime;
-        }
-        else
-        {
-            SpringComponent.AutoUpdate(gameObject);
-        }
-
-        foreach(Transform child in transform)
-        {
-            var comp = child.GetComponent<SpringComponent>();
-            if(comp != null)
+            //compute delta time
+            float deltaTime = 0f;
+            if (time == -1f)
             {
-                comp.Propegate(transform.position, transform.rotation, deltaTime);
+                time = (float)EditorApplication.timeSinceStartup;
+            }
+            deltaTime = (float)EditorApplication.timeSinceStartup - time;
+            time = (float)EditorApplication.timeSinceStartup;
+
+            if (Application.isPlaying)
+            {
+                deltaTime = Time.deltaTime;
+            }
+            else
+            {
+                SpringComponent.AutoUpdate(gameObject);
+            }
+
+            foreach (Transform child in transform)
+            {
+                var comp = child.GetComponent<SpringComponent>();
+                if (comp != null)
+                {
+                    comp.Propegate(transform.position, transform.rotation, deltaTime);
+                }
+            }
+
+            Draw(transform);
+        }
+
+        private static void Draw(Transform transform)
+        {
+            var comp = transform.GetComponent<SpringComponent>();
+            if (comp != null)
+            {
+                Gizmos.DrawSphere(comp.position, 0.1f);
+            }
+            foreach (Transform child in transform)
+            {
+                Draw(child);
             }
         }
-
-        Draw(transform);
-    }
-
-    private static void Draw(Transform transform)
-    {
-        var comp = transform.GetComponent<SpringComponent>();
-        if(comp != null)
-        {
-            Gizmos.DrawSphere(comp.position, 0.1f);
-        }
-        foreach(Transform child in transform)
-        {
-            Draw(child);
-        }
-    }
 #endif
+    }
 }

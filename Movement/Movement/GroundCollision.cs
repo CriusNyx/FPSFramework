@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
+using UnityUtilities;
 
-namespace GameEngine.Movement
+namespace FPSFramework.Movement
 {
     /// <summary>
     /// Stores the output of a ground collision detection

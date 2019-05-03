@@ -1,9 +1,12 @@
-﻿using System.Collections;
+﻿using FPSFramework.Springs;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityUtilities;
+using UnityUtilities.ExecutionOrder.ExecutionOrderControl;
 
-namespace GameEngine.Movement {
-
+namespace FPSFramework.Movement
+{
     [ExecutionOrder(ExecutionOrderValue.Camera)]
     [RequireComponent(typeof(MovementController))]
     public class ViewController : MonoBehaviour, CEventListener

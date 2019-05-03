@@ -4,18 +4,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityUtilities;
 
-public interface IWeapon : CEventListener
+namespace FPSFramework.Weapons
 {
-    void Fire(WeaponFireEvent fireEvent);
-}
-
-public class WeaponFireEvent : CEvent
-{
-    public Ray ray;
-
-    public WeaponFireEvent(Ray ray)
+    public interface IWeapon : CEventListener
     {
-        this.ray = ray;
+        void Fire(WeaponFireEvent fireEvent);
+    }
+
+    public class WeaponFireEvent : CEvent
+    {
+        public Ray ray;
+
+        public WeaponFireEvent(Ray ray)
+        {
+            this.ray = ray;
+        }
     }
 }
