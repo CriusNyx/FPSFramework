@@ -23,11 +23,11 @@ namespace FPSFramework.Weapons
         protected int layerMask;
         protected float distance;
         protected bool penetrate;
-        protected Action<Hurtbox, RaycastHit> OnHit;
+        protected Action<Scanbox, RaycastHit> OnHit;
 
         public void Fire(WeaponFireEvent fireEvent)
         {
-            Hitscan.Cast(fireEvent.ray, dHealth, distance, layerMask, penetrate, OnHit: OnHit);
+            Hitscan.Cast(fireEvent.ray, HitscanType.damage, dHealth, null, distance, layerMask, penetrate, OnHit: OnHit);
         }
     }
 }

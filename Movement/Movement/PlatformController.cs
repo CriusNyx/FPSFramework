@@ -11,7 +11,7 @@ namespace FPSFramework.Movement
     {
         MovementController movementController;
         Platform platformLastFrame;
-        Platform platform;
+        public Platform platform;
 
         private void Start()
         {

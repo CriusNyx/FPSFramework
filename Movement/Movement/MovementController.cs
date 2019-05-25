@@ -130,6 +130,18 @@ namespace FPSFramework.Movement
         #endregion
 
         #region Physics State
+        public Vector3 localPosition
+        {
+            get
+            {
+                return worldSpaceToCoordinateSpace.MultiplyPoint(transform.position);
+            }
+            set
+            {
+                transform.position = coordinateSpaceToWorldSpace.MultiplyPoint(value);
+            }
+        }
+
         /// <summary>
         /// The controller will attempt (in normalized space, relitive to maxSpeed) to match this velocity
         /// This vector is in 2D coordinate space
@@ -152,8 +164,8 @@ namespace FPSFramework.Movement
         {
             get
             {
-                Vector2 cache = targetVelocity;
-                return coordinateSpaceToWorldSpace.MultiplyVector(new Vector3(cache.x, 0f, cache.y));
+                Vector2 temp = targetVelocity;
+                return coordinateSpaceToWorldSpace.MultiplyVector(new Vector3(temp.x, 0f, temp.y));
             }
         }
 
@@ -177,19 +189,45 @@ namespace FPSFramework.Movement
             }
         }
 
+        public Vector3 localVelocity
+        {
+            get
+            {
+                return worldSpaceToCoordinateSpace.MultiplyVector(velocity);
+            }
+            set
+            {
+                velocity = coordinateSpaceToWorldSpace.MultiplyVector(value);
+            }
+        }
+
         #endregion
 
         #region Physics Defaults
-        public const float DEFAULT_MAX_SPEED = 10F, DEFAULT_GRAVITY = -30F, DEFAULT_ACCELERATION_RATIO = 4F, DEFAULT_AIR_ACCELERATION_RATIO = 1f;
-        public const int GROUND_MAX_FREEZE_FRAMES = 4;
-        public static readonly Stats DEFAULT_PLAYER_STATS = new Stats(DEFAULT_MAX_SPEED, DEFAULT_GRAVITY, DEFAULT_ACCELERATION_RATIO, DEFAULT_AIR_ACCELERATION_RATIO, GROUND_MAX_FREEZE_FRAMES);
+        public const float 
+            DEFAULT_MAX_SPEED = 10F, 
+            DEFAULT_GRAVITY = -30F, 
+            DEFAULT_ACCELERATION_RATIO = 4F, 
+            DEFAULT_AIR_ACCELERATION_RATIO = 1f;
+
+        public const int 
+            GROUND_MAX_FREEZE_FRAMES = 4;
+
+        public static readonly Stats 
+            DEFAULT_PLAYER_STATS = new Stats(DEFAULT_MAX_SPEED, DEFAULT_GRAVITY, DEFAULT_ACCELERATION_RATIO, DEFAULT_AIR_ACCELERATION_RATIO, GROUND_MAX_FREEZE_FRAMES);
         #endregion
 
         #region Physics Properties
         public struct Stats
         {
-            public float maxSpeed, gravity, accelerationRatio, airAccelerationRatio;
-            public int groundMaxFreezeFrames;
+            public float 
+                maxSpeed, 
+                gravity, 
+                accelerationRatio, 
+                airAccelerationRatio;
+
+            public int 
+                groundMaxFreezeFrames;
 
             public Stats(float maxSpeed, float gravity, float accelerationRatio, float airAccelerationRatio, int groundMaxFreezeFrames)
             {

@@ -18,7 +18,7 @@ namespace FPSFramework.Springs
             value *= dConstant;
             value = Mathf.MoveTowards(value, 0f, staticStrength * deltaTime);
 
-            if (maxDistance > 0f && Mathf.Abs(value) > maxDistance)
+            if(maxDistance > 0f && Mathf.Abs(value) > maxDistance)
             {
                 value = Mathf.Sign(value) * maxDistance;
             }

@@ -13,7 +13,7 @@ namespace FPSFramework.HealthSystem
         /// <summary>
         /// Base ammound to damage/healing to apply
         /// </summary>
-        public float baseDeltaHealth = 0f;
+        public readonly float baseDeltaHealth = 0f;
 
         /// <summary>
         /// Create a new delta health object
@@ -41,6 +41,11 @@ namespace FPSFramework.HealthSystem
         public virtual float GetDelta(Health health)
         {
             return baseDeltaHealth;
+        }
+
+        public static implicit operator DeltaHealth(float health)
+        {
+            return new DeltaHealth(health);
         }
     }
 }

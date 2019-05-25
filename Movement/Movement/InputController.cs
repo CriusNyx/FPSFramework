@@ -7,16 +7,17 @@ using UnityUtilities;
 
 namespace FPSFramework.Movement
 {
+    [AutoInit]
     public class InputController : MonoBehaviour
     {
         EventPlayerNumberChannel playerNumber = EventPlayerNumberChannel.player1;
 
         void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Escape))
-            {
-                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-            }
+            //if (Input.GetKeyDown(KeyCode.Escape))
+            //{
+            //    SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            //}
 
             Vector2 input = Vector2.zero;
             if (Input.GetKey(KeyCode.W))

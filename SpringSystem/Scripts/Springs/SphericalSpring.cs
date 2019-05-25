@@ -14,7 +14,7 @@ namespace FPSFramework.Springs
 
             Vector3 temp = this.position - position;
             float mag = temp.magnitude;
-            if (mag != 0)
+            if(mag != 0)
             {
                 float newMag = mag * dConstant;
                 newMag = Mathf.Max(0f, newMag - staticStrength);
@@ -22,7 +22,10 @@ namespace FPSFramework.Springs
                 temp = temp * newMag / mag;
             }
 
-            return (this.position - temp, rotation);
+            //Vector3 temp = MathFunctions.ELerp(this.position, position, dynamicStrength, deltaTime);
+            //temp = Vector3.MoveTowards(temp, position, Mathf.Clamp01(staticStrength * deltaTime));
+
+            return (position + temp, rotation);
         }
 
         protected override (Vector3 position, Quaternion rotation) PropegateReset(Vector3 position, Quaternion rotation)
